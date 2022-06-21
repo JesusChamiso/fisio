@@ -9,12 +9,34 @@
 @section('content')
     <div class="container">
         <div class="row g-3">
-            <div class="col-md-3 align-items-end">
             <div class="col-md-6">
                 {{-- Accion Editar --}}
-                <button class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#editPac">Editar</button>
                 @livewire('editar-paciente-component',['paciente' => $paciente])
+                <button class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#editPac">Editar</button>
+                <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
+                <div class="modal fade" id="eliminar" tabindex="-1" aria-labelledby="eliminarPaciente" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Eliminar Paciente</h5>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          ¿Esta seguro de eliminar al Paciente {{ $paciente->nombres }} {{ $paciente->apellido_patenro }} {{ $paciente->apellido_materno }}?
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                          <form method="post" action="{{ route('paciente.destroy', ['id' => $paciente->codigo_paciente]) }}">
+                            @csrf @method('DELETE')
+                            <button class="btn btn-primary">Eliminar</button>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 {{-- Fin Accion Editar --}}
+            </div>
+            <div class="col-md-6">
             </div>
         </div>
     </div>
@@ -26,8 +48,8 @@
                         <div class="text-center">
                             <img src="{{ asset('/img/user.png') }}" class="profile-user-img img-fluid img-circle">
                         </div>
-                        <h3 class="profile-username text-center">{{ $paciente->nombrePrimer }} {{ $paciente->nombreSegundo }} {{ $paciente->apPaterno }} {{ $paciente->apMaterno }} {{ $paciente->apCasada }}</h3>
-                        <p class="text-muted text-center">{{ $paciente->ci }} {{ $paciente->ci_complemento }} {{ $paciente->depto_abr }}</p>
+                        <h3 class="profile-username text-center">{{ $paciente->nombres }} {{ $paciente->apellido_patenro }} {{ $paciente->apellido_materno }}</h3>
+                        <p class="text-muted text-center">{{ $paciente->telefono }}</p>
                     </div>
                 </div>
             </div>
@@ -54,18 +76,8 @@
                                         role="tab" 
                                         aria-controls="nav-evaluacion" 
                                         aria-selected="false">
-                                        Historial y valoracion
-                                </button>
-                                <button class="btn btn-primary nav-link" 
-                                        id="nav-historial-tab" 
-                                        data-bs-toggle="tab" 
-                                        data-bs-target="#nav-historial" 
-                                        type="button" 
-                                        role="tab" 
-                                        aria-controls="nav-historial" 
-                                        aria-selected="false">
-                                        Seguimiento de Tratamiento
-                                </button>                                
+                                        Historial
+                                </button>                               
                             </div>
                         </nav>
                     </div>
@@ -76,97 +88,115 @@
                                     <li class="list-group-item">
                                         <strong class="fs-5 text-wrap">Nombre Completo</strong> 
                                         <p class="h6 float-right">
-                                            {{ $paciente->nombrePrimer }} {{ $paciente->nombreSegundo }} {{ $paciente->apPaterno }} {{ $paciente->apMaterno }} {{ $paciente->apCasada }}
+                                            {{ $paciente->nombres }} {{ $paciente->apellido_patenro }} {{ $paciente->apellido_materno }}
                                         </p>
                                     </li>
                                     <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Cedula de identidad</strong> 
+                                        <strong class="fs-5 text-wrap">Peso:</strong> 
                                         <p class="h6 float-right">
-                                            {{ $paciente->ci }} {{ $paciente->ci_complemento }} {{ $paciente->depto_abr }}
+                                            {{ $paciente->peso }}
                                         </p>
                                     </li>
                                     <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Fecha de nacimiento</strong> 
+                                        <strong class="fs-5 text-wrap">Talla</strong> 
                                         <p class="h6 float-right">
-                                            {{ \Carbon\Carbon::parse($paciente->nacimiento)->isoFormat('LL') }}
+                                            {{ $paciente->talla }}
                                         </p>
                                     </li>
                                     <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Edad</strong> 
+                                        <strong class="fs-5 text-wrap">telefono</strong> 
                                         <p class="h6 float-right">
-                                            {{ \Carbon\Carbon::createFromDate($paciente->nacimiento)->diffInYears(Carbon\Carbon::now()) }} {{ ' Años' }}
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Lugar de Nacimiento</strong> 
-                                        <p class="h6 float-right">
-                                            {{ $paciente->lug_nac }}
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Estado Civil</strong> 
-                                        <p class="h6 float-right">
-                                            {{ $paciente->est_civil }}
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Ocupacion</strong> 
-                                        <p class="h6 float-right">
-                                            {{ $paciente->ocupacion }}
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Direccion </strong> 
-                                        <p class="fst-italic float-right">
-                                            {{ $paciente->DireccionDetalle }}, {{ $paciente->deptoDireccion }}
-                                        </p>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <strong class="fs-5 text-wrap">Telefono </strong> 
-                                        <p class="fst-italic float-right">
-                                            {{ $telefono->detalle }}
+                                            {{ $paciente->telefono }}
                                         </p>
                                     </li>
                                 </ul>                                
                             </div>
-                            @include('paciente.seguimientoTratamiento')
+                            {{-- @include('paciente.seguimientoTratamiento') --}}
                             {{-- Historial y navegacion --}}
                             <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
                                 <div class="row g-3">
                                     <div class="col-md-6 text-center">
-                                        <a class="btn btn-info m-1" data-bs-toggle="modal" role="button" data-bs-target="#AgregValoracion">ANAMNESIS</a>
-                                    </div>
-                                    <div class="col-md-6 text-center">
-                                        <a class="btn btn-success m-1" data-bs-toggle="modal" href="#AgregTrat" role="button">VALORACION KINESICO FISICA</a>
+                                        <a class="btn btn-info m-1" data-bs-toggle="modal" role="button" data-bs-target="#NuevoHistorial">Agregar Historial</a>
                                     </div>
                                     {{-- Vista de La Consulta --}}
-                                    <div class="accordion" id="accordionFlushExample">
+                                    @php $contador = 0; @endphp
+                                    @foreach ($consulta as $c)
+                                    @php
+                                     $contador=$contador+1;    
+                                    @endphp
+                                    <div class="accordion" id="accordionFlushExample{{ $c->codigo_consulta }}">
                                         <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingOne">
-                                                <button class="accordion-button collapsed h4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                    <p class="text-bold">ANAMNESIS</p>
+                                            <h2 class="accordion-header" id="flush-headingOne{{ $c->codigo_consulta }}">
+                                                <button class="accordion-button collapsed h4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{ $c->codigo_consulta }}" aria-expanded="false" aria-controls="flush-collapseOne">
+                                                    <p class="text-bold">Historial @php echo $contador; @endphp </p>
                                                 </button>
                                             </h2>
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                                <div class="row g-3 m-4">
-                                                    @include('paciente.historialValoracion')
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="accordion-item">
-                                            <h2 class="accordion-header" id="flush-headingTwo">
-                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                                    <p class="text-bold">VALORACION KINESICO FISICA</p>
-                                                </button>
-                                            </h2>
-                                            <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                                <div class="row g-3 m-4">
-                                                    @include('paciente.historialTratamiento')
-                                                </div>
+                                            <div id="flush-collapseOne{{ $c->codigo_consulta }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample{{ $c->codigo_consulta }}">
+                                                <div class="row g-3">
+                                                    <button type="button" class="btn btn-secondary col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $c->codigo_consulta }}">
+                                                        Editar
+                                                    </button>
+                                                    
+                                                    <div class="modal fade" id="exampleModal{{ $c->codigo_consulta }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Historial @php echo $contador; @endphp</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="col-md-12 form-floating">
+                                                                    <form action="{{ route('consulta.editar', $c) }}" method="POST" id="editarForm">
+                                                                        @method('PATCH')@csrf
+                                                                        <label for="descripcion">Descripcion</label>
+                                                                        <textarea name="descripcion" wire:model="descripcion" class="form-control @error('descripcion')is-invalid @enderror" placeholder="Descripcion" id="descripcion" required>{{ $c->descripcion }}</textarea>    
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-primary" onclick="document.getElementById('editarForm').submit();">Guardar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
+                                                    <button type="button" class="btn btn-danger col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#eliminar{{ $c->codigo_consulta }}">
+                                                        Eliminar
+                                                    </button>
+                                                    <div class="modal fade" id="eliminar{{ $c->codigo_consulta }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Historial @php echo $contador; @endphp</h5>
+                                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="col-md-12 form-floating">
+                                                                    <form action="{{ route('consulta.eliminar', $c) }}" method="POST" id="eliminarForm{{ $c->codigo_consulta }}">
+                                                                        @method('DELETE') @csrf
+                                                                        <input type="hidden" name="codigo_consulta" value="{{ $c->codigo_consulta }}">
+                                                                        <label for="descripcion">Descripcion</label>
+                                                                        <input name="descripcion" class="form-control" id="descripcion" required value="{{ $c->descripcion }}">    
+                                                                    </div>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-danger" onclick="document.getElementById( 'eliminarForm'+{{ $c->codigo_consulta }} ).submit();">Eliminar</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{-- @livewire('editar-consulta',['consulta' => $consulta]) --}}
+                                                </div>
+                                                <div class="row g-3 m-4">
+                                                    {{ $c->descripcion }}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                     {{-- Fin vista Consulta --}}
                                 </div>
                             </div>
@@ -177,22 +207,14 @@
             </div>
         </div>
     </div>
-@include('paciente.paciente_valoracion')
-@include('paciente.paciente_tratamiento')
-
 @stop
-
+@livewire('nuevo-historial',['paciente' => $paciente])
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/select2-bootstrap.min.css') }}">
 @stop
 @section('js')
     <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/select2.min.js') }}"></script>
     <script>
-        //$.fn.modal.Constructor.prototype._enforceFocus = function() {};
-        
         $(document).ready(function() {
             $(".form-control").on("keypress", function() {
                 $input = $(this);

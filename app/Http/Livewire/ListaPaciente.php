@@ -28,9 +28,9 @@ class ListaPaciente extends Component
         if($this->search !== ''){
             $this->page = 1;
         }
-        $pac = Paciente::where('nombres','LIKE', "'%".trim($this->search)."%'")
-                ->orWhere('apellido_paterno', 'LIKE', "'%".trim($this->search)."%'")
-                ->orWhere('apellido_materno', 'LIKE', "'%".trim($this->search)."%'")
+        $pac = Paciente::where('nombres','LIKE', "%".trim($this->search)."%")
+                ->orWhere('apellido_paterno', 'LIKE', "%".trim($this->search)."%")
+                ->orWhere('apellido_materno', 'LIKE', "%".trim($this->search)."%")
                 ->paginate($this->perPage);
         return view('livewire.lista-paciente',['pac' => $pac]);
     }

@@ -20,10 +20,10 @@
 @stop
 
 @section('css')
-    {{-- <link rel="stylesheet" href="{{ asset('css/app.css') }}"> --}}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @stop
 @section('js')
-    {{-- <script src="{{ asset('js/app.js') }}"></script> --}}
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
         $(document).ready(function() {
             $(".form-control").on("keypress", function() {

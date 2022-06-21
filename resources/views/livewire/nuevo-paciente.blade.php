@@ -14,7 +14,7 @@
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="guardar" class="row g-3" method="post" action="#">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="nombres" class="form-label">Nombres</label>
                             <input wire:model="nombres" type="text" name="nombres" id="nombres" class="form-control @error('nombres')is-invalid @enderror" placeholder="Nombres">
                             @error('nombres')
@@ -23,7 +23,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="apellido_paterno" class="form-label">Apellido Paterno</label>
                             <input wire:model="apellido_paterno" type="text" class="form-control @error('apellido_paterno') is-invalid @enderror" name="apellido_paterno" id="apellido_paterno" placeholder="Apellido Paterno">
                             @error('apellido_paterno')
@@ -32,7 +32,7 @@
                             </span>
                             @enderror
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label for="apellido_materno" class="form-label">Apellido Materno</label>
                             <input wire:model="apellido_materno" type="text" class="form-control @error('apellido_materno') is-invalid @enderror" name="apellido_materno" id="apellido_materno" placeholder="Apellido Materno">
                             @error('apellido_materno')

@@ -20,7 +20,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4" >
                 @forelse ($pac as $d)
                 <div class="col">
-                    {{-- <a href="{{ route('paciente_show', $d->id) }}" style="text-decoration:none;" class="text-dark"> --}}
+                    <a href="{{ route('paciente_show', $d->codigo_paciente) }}" style="text-decoration:none;" class="text-dark">
                         <div class="card h-100">
                             <div class="text-center mt-2">
                                 <img src="{{ asset('/img/user.png') }}" class="profile-user-img img-fluid img-circle">
@@ -39,7 +39,7 @@
                                 </p> --}}
                             </div>
                         </div>
-                    {{-- </a> --}}
+                    </a>
                 </div>
                 @empty
                     <ul><li>No hay elementos</li></ul>     
