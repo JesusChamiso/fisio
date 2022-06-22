@@ -29,9 +29,6 @@
                                 <h5 class="card-title">
                                     {{ $d->nombres }} {{ $d->apellido_paterno }} {{ $d->apellido_materno }}
                                 </h5>
-                                <h5 class="card-text">
-                                    <strong>CI: </strong>{{ $d->ci }}{{ $d->ci_complemento }} {{ $d->depto_abr }}
-                                </h5>
                                 {{-- <p class="card-text">
                                     <a class="card-link mx-0" href="{{ route('paciente_show', $d->id) }}">
                                         mas detalles

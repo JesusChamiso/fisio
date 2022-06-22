@@ -5,18 +5,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\RecetaController;
-use App\Models\Paciente;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('home');
@@ -32,3 +20,4 @@ Route::patch('/consulta/{c}', [PacienteController::class, 'update'])->name('cons
 Route::delete('/consulta/{c}', [PacienteController::class, 'delete'])->name('consulta.eliminar');
 Route::get('/agenda', [CitaController::class, 'index'])->name('agenda.index');
 Route::get('/recetas', [RecetaController::class, 'index'])->name('receta.index');
+Route::get('/receta/{id}',[RecetaController::class, 'show'])->name('receta_show');

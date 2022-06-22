@@ -168,7 +168,7 @@
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Historial @php echo $contador; @endphp</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar? Historial @php echo $contador; @endphp</h5>
                                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
@@ -177,7 +177,7 @@
                                                                         @method('DELETE') @csrf
                                                                         <input type="hidden" name="codigo_consulta" value="{{ $c->codigo_consulta }}">
                                                                         <label for="descripcion">Descripcion</label>
-                                                                        <input name="descripcion" class="form-control" id="descripcion" required value="{{ $c->descripcion }}">    
+                                                                        <input name="descripcion" class="form-control" id="descripcion" required value="{{ $c->descripcion }}"readonly>    
                                                                     </div>
                                                                     </form>
                                                                 </div>

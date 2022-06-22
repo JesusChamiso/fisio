@@ -17,11 +17,12 @@
                         <div wire:ignore class="col-md-12">
                             <label for="nombres" class="form-label">Paciente</label>
                             <br>
-                            <select style="width: 100%;" name="paciente" id="select2" class="form-control ih-medium ip-light radius-xs b-light">
+                            <select wire:model="pac" style="width: 100%;" name="paciente" id="select2" class="form-control ih-medium ip-light radius-xs b-light">
                                 @foreach ($paciente as $paci)
-                                <option value="{{ $paci->codigo_paciente }}">{{ $paci->codigo_paciente }}{{ $paci->nombres }}{{ " " }}{{ $paci->apellido_paterno }}{{ " " }}{{ $paci->apellido_materno }}</option>
+                                <option value="{{ $paci->codigo_paciente }}">{{ $paci->nombres }}{{ " " }}{{ $paci->apellido_paterno }}{{ " " }}{{ $paci->apellido_materno }}</option>
                                 @endforeach
                             </select>
+                            <input wire:model="numero" type="text" value="{{ $numero }}">
                         </div>
                         <div class="col-md-12">
                             <label for="apellido_paterno" class="form-label">Descripcion</label>

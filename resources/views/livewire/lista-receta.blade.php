@@ -20,7 +20,7 @@
             <div class="row row-cols-1 row-cols-md-3 g-4" >
                 @forelse ($receta as $d)
                 <div class="col">
-                    <a href="{{ route('receta_show', $d->codigo_receta) }}" style="text-decoration:none;" class="text-dark">
+                    <a href="{{ route('receta_show', ['id' => $d->codigo_receta]) }}" style="text-decoration:none;" class="text-dark">
                         <div class="card h-100">
                             <div class="text-center mt-2">
                                 <img src="{{ asset('/img/user.png') }}" class="profile-user-img img-fluid img-circle">
@@ -28,9 +28,6 @@
                             <div class="card-body">
                                 <h5 class="card-title">
                                     {{ $d->nombres }} {{ $d->apellido_paterno }} {{ $d->apellido_materno }}
-                                </h5>
-                                <h5 class="card-text">
-                                    <strong>CI: </strong>{{ $d->ci }}{{ $d->ci_complemento }} {{ $d->depto_abr }}
                                 </h5>
                                 {{-- <p class="card-text">
                                     <a class="card-link mx-0" href="{{ route('paciente_show', $d->id) }}">
