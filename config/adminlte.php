@@ -253,8 +253,13 @@ return [
         ],
         [
             'text'        => 'Cita Medica',
-            'url'         => '/cita-medica',
+            'url'         => '/agenda',
             'icon'        => 'fas fa-fw fa-calendar',
+        ],
+        [
+            'text'        => 'Recetas',
+            'url'         => '/recetas',
+            'icon'        => 'fas fa-fw fa-scroll',
         ],
         [
             'text'        => 'Pago',
