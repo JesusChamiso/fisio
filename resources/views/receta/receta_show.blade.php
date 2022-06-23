@@ -51,42 +51,48 @@
                     <div class="tab-content" id="nav-tabContent">
                         <div class="tab-pane fade show active" id="nav-datosP" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
                             <div class="row g-3">
-                                <div class="col-md-6 text-center">
-                                    <a class="btn btn-info m-1" data-bs-toggle="modal" role="button" data-bs-target="#NuevoHistorial">Agregar Historial</a>
-                                </div>
-                                @php $contador = 0; @endphp
                                 @foreach ($consulta as $c)
-                                @php
-                                 $contador=$contador+1;    
-                                @endphp
                                 <div class="accordion" id="accordionFlushExample{{ $c->codigo_receta }}">
                                     <div class="accordion-item">
                                         <h2 class="accordion-header" id="flush-headingOne{{ $c->codigo_receta }}">
                                             <button class="accordion-button collapsed h4" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne{{ $c->codigo_receta }}" aria-expanded="false" aria-controls="flush-collapseOne">
-                                                <p class="text-bold">Receta @php echo $contador; @endphp </p>
+                                                <p class="text-bold">Receta {{ $c->numero }} </p>
                                             </button>
                                         </h2>
                                         <div id="flush-collapseOne{{ $c->codigo_receta }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample{{ $c->codigo_receta }}">
-                                            <div class="row g-3">
+                                            <div class="row g-3 m-4">
+                                                {{ $c->descripcion }}
+                                            </div>
+                                            <div class="mt-3 mb-3">
+
+                                            </div>
+                                            <div class="row g-3 mb-3">
+                                                @can('recetas.editar')                                                    
                                                 <button type="button" class="btn btn-secondary col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $c->codigo_receta }}">
                                                     Editar
                                                 </button>
-                                                
+                                                @endcan
+                                                @can('recetas.eliminar')                                                    
+                                                <button type="button" class="btn btn-danger col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#eliminar{{ $c->codigo_receta }}">
+                                                    Eliminar
+                                                </button>
+                                                @endcan
+                                                @can('recetas.editar')                                                    
                                                 <div class="modal fade" id="exampleModal{{ $c->codigo_receta }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Historial @php echo $contador; @endphp</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">Receta {{ $c->numero }}</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="col-md-12 form-floating">
-                                                                {{-- <form action="{{ route('consulta.editar', $c) }}" method="POST" id="editarForm">
-                                                                    @method('PATCH')@csrf
+                                                                <form action="{{ route('receta.editar', ['c' => $c->codigo_receta]) }}" method="POST" id="editarForm">
+                                                                    @method('PATCH') @csrf
                                                                     <label for="descripcion">Descripcion</label>
                                                                     <textarea name="descripcion" wire:model="descripcion" class="form-control @error('descripcion')is-invalid @enderror" placeholder="Descripcion" id="descripcion" required>{{ $c->descripcion }}</textarea>    
                                                                 </div>
-                                                                </form> --}}
+                                                                </form>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -95,26 +101,24 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
-                                                <button type="button" class="btn btn-danger col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#eliminar{{ $c->codigo_receta }}">
-                                                    Eliminar
-                                                </button>
+                                                @endcan
+                                                @can('recetas.eliminar')                                                    
                                                 <div class="modal fade" id="eliminar{{ $c->codigo_receta }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar? Receta @php echo $contador; @endphp</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar? Receta {{ $c->numero }}</h5>
                                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="col-md-12 form-floating">
-                                                                {{-- <form action="{{ route('consulta.eliminar', $c) }}" method="POST" id="eliminarForm{{ $c->codigo_receta }}">
+                                                                <form action="{{ route('receta.eliminar', ['c' => $c->codigo_receta]) }}" method="POST" id="eliminarForm{{ $c->codigo_receta }}">
                                                                     @method('DELETE') @csrf
-                                                                    <input type="hidden" name="codigo_consulta" value="{{ $c->codigo_receta }}">
+                                                                    <input type="hidden" name="codigo_receta" value="{{ $c->codigo_receta }}">
                                                                     <label for="descripcion">Descripcion</label>
                                                                     <input name="descripcion" class="form-control" id="descripcion" required value="{{ $c->descripcion }}"readonly>    
                                                                 </div>
-                                                                </form> --}}
+                                                                </form>
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -123,9 +127,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="row g-3 m-4">
-                                                {{ $c->descripcion }}
+                                                @endcan
                                             </div>
                                         </div>
                                     </div>

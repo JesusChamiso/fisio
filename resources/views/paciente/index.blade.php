@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>Pacientes</h1>
+    @can('paciente.crear')
     <div>
         <button class="mt-2 btn btn-success text-white"
                 type="button"
@@ -12,6 +13,7 @@
                 Nuevo Paciente    
         </button>
     </div>
+    @endcan
 @stop
 
 @section('content')

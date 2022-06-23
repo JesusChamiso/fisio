@@ -7,6 +7,10 @@ use App\Models\Evento;
 
 class CitaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:agenda');
+    }
     public function index()
     {
         return view('agenda');

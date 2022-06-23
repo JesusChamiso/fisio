@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\Paciente;
 use App\Models\Receta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NuevaReceta extends Component
 {
@@ -19,7 +20,7 @@ class NuevaReceta extends Component
         $this->pac = "";
         $this->descripcion = "";
         $this->fecha = "";
-        $this->numero = 0;
+        $this->numero = "";
     }
     public function render()
     {
@@ -28,9 +29,22 @@ class NuevaReceta extends Component
     }
     public function guardar()
     {
-        $this->numero = $this->numero+1;
         // dd($this->numero);
-        $dataValidate = $this->validate([
+        $numero = DB::table("receta")
+                    ->limit(1)
+                    ->orderBy("numero","desc")
+                    ->first();
+        
+        // dd($numero);
+        if($numero === null){
+            // dd('hola mundo');
+            $this->numero = 0;
+            $this->numero = $this->numero+1;
+        }else{
+            $this->numero = $numero->numero+1;
+            // dd($this->numero);
+        }
+        $this->validate([
             'descripcion' => 'required',
             'pac' => 'required',
             'fecha' => 'required'
@@ -42,8 +56,9 @@ class NuevaReceta extends Component
             Receta::create([
                 'codigo_paciente' => $this->pac,
                 'descripcion' => $this->descripcion,
+                'numero' => $this->numero,
                 'fecha' => $this->fecha
         ]);
-        return redirect()->to('/receta');
+        return redirect()->to('/recetas');
     }
 }

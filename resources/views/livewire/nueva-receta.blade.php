@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form wire:submit.prevent="guardar" class="row g-3" method="post" action="#">
+                    {{-- <form wire:submit.prevent="guardar" class="row g-3" method="post" action="#"> --}}
                         <div wire:ignore class="col-md-12">
                             <label for="nombres" class="form-label">Paciente</label>
                             <br>
@@ -22,7 +22,7 @@
                                 <option value="{{ $paci->codigo_paciente }}">{{ $paci->nombres }}{{ " " }}{{ $paci->apellido_paterno }}{{ " " }}{{ $paci->apellido_materno }}</option>
                                 @endforeach
                             </select>
-                            <input wire:model="numero" type="text" value="{{ $numero }}">
+                            <input wire:model="numero" type="text" value="{{ $numero }}" hidden>
                         </div>
                         <div class="col-md-12">
                             <label for="apellido_paterno" class="form-label">Descripcion</label>
@@ -46,7 +46,7 @@
                             <button type="button" class="btn btn-danger text-white" data-bs-dismiss="modal">Cancelar</button>
                             <button type="button" class="btn btn-success text-white" wire:click="guardar">Guardar</button>
                         </div>
-                    </form>
+                    {{-- </form> --}}
                 </div>
             </div>
         </div>

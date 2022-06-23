@@ -11,6 +11,7 @@
         <div class="row g-3">
             <div class="col-md-6">
                 {{-- Accion Editar --}}
+                @can('paciente.crear')                    
                 @livewire('editar-paciente-component',['paciente' => $paciente])
                 <button class="btn btn-info mb-3" data-bs-toggle="modal" data-bs-target="#editPac">Editar</button>
                 <button class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#eliminar">Eliminar</button>
@@ -34,6 +35,7 @@
                       </div>
                     </div>
                   </div>
+                @endcan
                 {{-- Fin Accion Editar --}}
             </div>
             <div class="col-md-6">
@@ -115,9 +117,11 @@
                             {{-- Historial y navegacion --}}
                             <div class="tab-pane fade" id="nav-evaluacion" role="tabpanel" aria-labelledby="nav-evaluacion-tab">
                                 <div class="row g-3">
+                                    @can('historial.crear')
                                     <div class="col-md-6 text-center">
                                         <a class="btn btn-info m-1" data-bs-toggle="modal" role="button" data-bs-target="#NuevoHistorial">Agregar Historial</a>
                                     </div>
+                                    @endcan
                                     {{-- Vista de La Consulta --}}
                                     @php $contador = 0; @endphp
                                     @foreach ($consulta as $c)
@@ -133,10 +137,10 @@
                                             </h2>
                                             <div id="flush-collapseOne{{ $c->codigo_consulta }}" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample{{ $c->codigo_consulta }}">
                                                 <div class="row g-3">
+                                                    @can('historial.editar')
                                                     <button type="button" class="btn btn-secondary col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $c->codigo_consulta }}">
                                                         Editar
-                                                    </button>
-                                                    
+                                                    </button>                                                    
                                                     <div class="modal fade" id="exampleModal{{ $c->codigo_consulta }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                         <div class="modal-dialog">
                                                             <div class="modal-content">
@@ -160,7 +164,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
+                                                    @endcan
+                                                    @can('historial.eliminar')
                                                     <button type="button" class="btn btn-danger col-md-3 ml-4 mt-4" data-bs-toggle="modal" data-bs-target="#eliminar{{ $c->codigo_consulta }}">
                                                         Eliminar
                                                     </button>
@@ -188,6 +193,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    @endcan
                                                     {{-- @livewire('editar-consulta',['consulta' => $consulta]) --}}
                                                 </div>
                                                 <div class="row g-3 m-4">
@@ -208,7 +214,9 @@
         </div>
     </div>
 @stop
-@livewire('nuevo-historial',['paciente' => $paciente])
+@can('historial.crear')
+    @livewire('nuevo-historial',['paciente' => $paciente])
+@endcan
 @section('css')
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 @stop

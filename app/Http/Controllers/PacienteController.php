@@ -8,6 +8,14 @@ use App\Models\ConsultaMedica;
 
 class PacienteController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('can:paciente.index')->only('index','show');
+        $this->middleware('can:historial.editar')->only('update');
+        $this->middleware('can:paciente.eliminar')->only('destroy');
+        $this->middleware('can:historial.eliminar')->only('delete');
+    }
     public function index()
     {
         return view('paciente.index');

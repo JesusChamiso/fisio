@@ -30,12 +30,12 @@ class ListaReceta extends Component
         if($this->search !== ''){
             $this->page = 1;
         }
-        $receta = vw_receta_paciente::where('nombres','LIKE', "%".trim($this->search)."%")
+        $receta = Paciente::where('nombres','LIKE', "%".trim($this->search)."%")
                             ->orWhere('apellido_paterno', 'LIKE', "%".trim($this->search)."%")
                             ->orWhere('apellido_materno', 'LIKE', "%".trim($this->search)."%")
                             ->paginate($this->perPage);
         return view('livewire.lista-receta',[
                         'receta' => $receta
-        ]);
+                    ]);
     }
 }

@@ -250,71 +250,26 @@ return [
             'text'        => 'Pacientes',
             'url'         => '/paciente',
             'icon'        => 'far fa-fw fa-user',
+            'can'         => 'paciente.index'
         ],
         [
             'text'        => 'Cita Medica',
             'url'         => '/agenda',
             'icon'        => 'fas fa-fw fa-calendar',
+            'can'         => 'agenda'
         ],
         [
             'text'        => 'Recetas',
             'url'         => '/recetas',
             'icon'        => 'fas fa-fw fa-scroll',
+            'can'         => 'recetas.index'
         ],
         [
             'text'        => 'Pago',
             'url'         => '/pago',
             'icon'        => 'fas fa-fw fa-wallet',
+            'can'         => 'pago.index'
             
-        ],
-        ['header' => 'account_settings'],
-        [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
-        ],
-        [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
-        ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
         ],
     ],
 

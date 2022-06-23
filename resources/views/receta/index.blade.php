@@ -4,6 +4,7 @@
 
 @section('content')
     <h1>Recetas</h1>
+    @can('recetas.crear')
     <div>
         <button class="mt-2 mb-2 btn btn-success text-white"
                 type="button"
@@ -12,8 +13,14 @@
                 Nueva Receta    
         </button>
     </div>
-    @livewire('lista-receta')
-    @livewire('nueva-receta')
+    @endcan
+
+    @can('recetas.index')
+        @livewire('lista-receta')
+    @endcan
+    @can('recetas.crear')
+        @livewire('nueva-receta')
+    @endcan
 @stop
 
 @section('css')
