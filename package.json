@@ -8,7 +8,7 @@
         "hot": "mix watch --hot",
         "prod": "npm run production",
         "production": "mix --production",
-        "limpiacss": "purgecss --css ./public/css/bootstrap/bootstrap.min.css --content ./resources/views/reporte/index.blade.php --output ./public/css"
+        "limpiacss": "purgecss --css ./public/css/app.css --content ./resources/views/reporte/index.blade.php --output ./public/css"
     },
     "devDependencies": {
         "@fullhuman/postcss-purgecss": "^4.1.3",

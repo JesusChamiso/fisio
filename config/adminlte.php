@@ -273,7 +273,7 @@ return [
         ],
         [
             'text'        => 'Reporte',
-            'url'         => '/reporte',
+            'url'         => '/reporte-index',
             'icon'        => 'fas fa-fw fa-file-alt',
             'can'         => 'reporte.index'
             

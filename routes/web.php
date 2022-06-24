@@ -36,3 +36,4 @@ Route::patch('/pagos/{c}', [PagosController::class, 'update'])->name('pagos.edit
 Route::delete('/pagos/{c}', [PagosController::class, 'delete'])->name('pagos.eliminar');
 
 Route::get('/reporte',[ReporteController::class, 'index'])->name('reporte.index');
+Route::get('/reporte-index',[ReporteController::class, 'vista'])->name('reporte.vista');

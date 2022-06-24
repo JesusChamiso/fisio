@@ -13,6 +13,7 @@
                         <br>
                         <select wire:model="pac" style="width: 100%;" name="paciente" id=""
                             class="form-control ih-medium ip-light radius-xs b-light">
+                                <option value="" selected disabled>Selccione un Paciente</option>
                             @foreach ($paciente as $paci)
                                 <option value="{{ $paci->codigo_paciente }}">
                                     {{ $paci->nombres }}{{ ' ' }}{{ $paci->apellido_paterno }}{{ ' ' }}{{ $paci->apellido_materno }}
