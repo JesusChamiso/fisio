@@ -14,6 +14,17 @@ class NuevaReceta extends Component
     public $descripcion;
     public $fecha;
     public $numero;
+    
+    protected $rules =[
+        'descripcion' => 'required',
+        'pac' => 'required',
+        'fecha' => 'required'
+    ];
+    protected $messages = [
+        'descripcion.required' => 'Este campo es obligatorio',
+        'pac.required' => 'Este campo es obligatorio',
+        'fecha.required' => 'La fecha es obligatoria'
+    ];
 
     public function mount()
     {
@@ -44,16 +55,9 @@ class NuevaReceta extends Component
             $this->numero = $numero->numero+1;
             // dd($this->numero);
         }
-        $this->validate([
-            'descripcion' => 'required',
-            'pac' => 'required',
-            'fecha' => 'required'
-        ],[
-            'descripcion.required' => 'Este campo es obligatorio',
-            'codigo_paciente.required' => 'Este campo es obligatorio',
-            'fecha.required' => 'La fecha es obligatoria'
-        ]);
-            Receta::create([
+        // dd($this->pac);
+        $this->validate();
+        Receta::create([
                 'codigo_paciente' => $this->pac,
                 'descripcion' => $this->descripcion,
                 'numero' => $this->numero,

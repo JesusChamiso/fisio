@@ -7,9 +7,11 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000",
         "hot": "mix watch --hot",
         "prod": "npm run production",
-        "production": "mix --production"
+        "production": "mix --production",
+        "limpiacss": "purgecss --css ./public/css/bootstrap/bootstrap.min.css --content ./resources/views/reporte/index.blade.php --output ./public/css"
     },
     "devDependencies": {
+        "@fullhuman/postcss-purgecss": "^4.1.3",
         "@popperjs/core": "^2.10.2",
         "axios": "^0.21",
         "bootstrap": "^5.1.3",

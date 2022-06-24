@@ -1,8 +1,6 @@
 <div>
     <div wire:ignore.self class="modal fade modal-dialog-scrollable" 
-        id="NuevaReceta" 
-        {{-- data-bs-backdrop="static"  --}}
-        {{-- data-bs-keyboard="false"  --}}
+        id="NuevaReceta"
         tabindex="-1" 
         aria-labelledby="NuevaRecetaLabel" 
         aria-hidden="true">
@@ -22,7 +20,7 @@
                                 <option value="{{ $paci->codigo_paciente }}">{{ $paci->nombres }}{{ " " }}{{ $paci->apellido_paterno }}{{ " " }}{{ $paci->apellido_materno }}</option>
                                 @endforeach
                             </select>
-                            <input wire:model="numero" type="text" value="{{ $numero }}" hidden>
+                            <input wire:model="pac" type="text" value="{{ $pac }}" hidden>
                         </div>
                         <div class="col-md-12">
                             <label for="apellido_paterno" class="form-label">Descripcion</label>

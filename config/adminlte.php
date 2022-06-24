@@ -266,9 +266,16 @@ return [
         ],
         [
             'text'        => 'Pago',
-            'url'         => '/pago',
+            'url'         => '/pagos',
             'icon'        => 'fas fa-fw fa-wallet',
             'can'         => 'pago.index'
+            
+        ],
+        [
+            'text'        => 'Reporte',
+            'url'         => '/reporte',
+            'icon'        => 'fas fa-fw fa-file-alt',
+            'can'         => 'reporte.index'
             
         ],
     ],
